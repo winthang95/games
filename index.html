@@ -1,169 +1,567 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<title>Flappy Bird - HTML Self Contained</title>
-<style>
-    body {
-        margin: 0;
-        background: #70c5ce;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Arial, sans-serif;
-    }
-    canvas {
-        background: #70c5ce;
-        border: 2px solid #000;
-    }
-    #hint {
-        position: absolute;
-        top: 20px;
-        color: #fff;
-        font-size: 18px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiếng Pháp XKLĐ - Edition Gen Z</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Config Colors -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#050b14',
+                            glass: 'rgba(20, 30, 50, 0.7)',
+                            pink: '#ff00ff',
+                            cyan: '#00ffff',
+                            yellow: '#ffcc00',
+                            purple: '#bd00ff'
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['"Orbitron"', 'sans-serif'], // Sci-fi font
+                        mono: ['"VT323"', 'monospace'], // Pixel font
+                        target: ['"Noto Sans"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch': 'glitch 1s linear infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Vũ Trụ Style */
+        body { 
+            font-family: 'Orbitron', sans-serif;
+            background-color: #050b14;
+            color: #e0f2fe;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+        }
+
+        /* Neon Text */
+        .neon-text-pink { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+        .neon-text-cyan { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+        
+        /* Neon Border */
+        .neon-border { border: 1px solid #00ffff; box-shadow: 0 0 5px #00ffff, inset 0 0 5px #00ffff; }
+        .neon-border-pink { border: 1px solid #ff00ff; box-shadow: 0 0 5px #ff00ff, inset 0 0 5px #ff00ff; }
+
+        /* Cyber Glass */
+        .glass-panel {
+            background: rgba(10, 20, 35, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+
+        /* Glitch Effect Class */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #ff00ff;
+        }
+
+        /* Flashcard 3D */
+        .perspective-1000 { perspective: 1000px; }
+        .card-container { transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-container.flipped { transform: rotateY(180deg); }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        /* HP Bar Animation */
+        .hp-fill { transition: width 0.3s ease-in-out, background-color 0.3s; }
+    </style>
 </head>
-<body>
+<body id="top" class="antialiased flex flex-col min-h-screen">
 
-<div id="hint">Click hoặc nhấn SPACE để bay</div>
-<canvas id="game" width="400" height="600"></canvas>
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-[#050b14]/90 backdrop-blur-md border-b border-cyber-cyan/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#top" class="flex items-center gap-2 group">
+                    <div class="text-3xl animate-bounce">👽</div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-widest text-cyber-cyan group-hover:text-cyber-pink transition-colors neon-text-cyan">KIOTVIET</span>
+                        <span class="text-[10px] text-cyber-pink font-mono tracking-widest">UNIVERSE_EDITION</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="scrollToSection('practice')" class="relative px-6 py-2 group font-bold text-white overflow-hidden rounded-none skew-x-[-15deg] border border-cyber-pink hover:bg-cyber-pink/20 transition-all">
+                        <span class="absolute w-full h-full bg-cyber-pink/10 top-0 left-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                        <span class="inline-block skew-x-[15deg]">🚀 VÀO GAME</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
+        <!-- Hero Section -->
+        <section class="text-center mb-16 relative" data-aos="zoom-in">
+            <h1 class="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-pink animate-pulse tracking-tighter mb-4 glitch-hover cursor-default">
+                XKLĐ <br class="md:hidden"> SIÊU CẤP VIP PRO
+            </h1>
+            <p class="text-lg md:text-xl text-cyber-cyan font-mono max-w-2xl mx-auto border-x border-cyber-cyan/50 px-4">
+                >> KHỞI ĐỘNG HỆ THỐNG NGÔN NGỮ PHÁP << <br>
+                <span class="text-white text-sm opacity-70">("Nạp lần đầu" kiến thức Công xưởng & Sinh tồn)</span>
+            </p>
+        </section>
 
-let gameOver = false;
-let score = 0;
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left: Content (Span 7) -->
+            <div class="lg:col-span-7 space-y-8">
+                
+                <!-- Section 1: Skills -->
+                <div class="glass-panel rounded-xl p-6 relative overflow-hidden group" data-aos="fade-right">
+                    <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity text-4xl">🤖</div>
+                    <h3 class="text-2xl font-bold text-cyber-yellow mb-6 flex items-center border-b border-cyber-yellow/30 pb-2 neon-text-cyan">
+                        <i class="fa-solid fa-skull mr-3"></i>ĐỐI ĐẦU BOSS (Quản lý)
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Card 1 -->
+                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item relative" onclick="playSound('Bonjour Chef')">
+                            <div class="absolute -top-2 -right-2 text-xs bg-cyber-cyan text-black font-bold px-1 hidden group-hover/item:block">BUFF +100 Thiện cảm</div>
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-mono text-gray-400">[SKILL: CHÀO]</span>
+                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                            </div>
+                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Bonjour Chef</p>
+                            <p class="text-sm text-gray-400 italic">"Em chào sếp ạ"</p>
+                        </div>
 
-// Bird
-const bird = {
-    x: 80,
-    y: 200,
-    radius: 15,
-    velocity: 0,
-    gravity: 0.5,
-    jump: -8
-};
+                        <!-- Card 2 -->
+                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item" onclick="playSound('Oui, j\'ai compris')">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-mono text-gray-400">[SKILL: DẠ VÂNG]</span>
+                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                            </div>
+                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Oui, j'ai compris</p>
+                            <p class="text-sm text-gray-400 italic">"Ok sếp, đã rõ!"</p>
+                        </div>
 
-// Pipes
-const pipes = [];
-const pipeWidth = 60;
-const pipeGap = 150;
-let frame = 0;
+                        <!-- Card 3 -->
+                        <div class="bg-black/40 p-4 border border-cyber-pink/30 hover:border-cyber-pink hover:bg-cyber-pink/10 transition-all cursor-pointer group/item" onclick="playSound('Attention! Danger')">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-mono text-cyber-pink animate-pulse">[CẢNH BÁO ĐỎ]</span>
+                                <i class="fa-solid fa-volume-high text-cyber-pink"></i>
+                            </div>
+                            <p class="text-xl font-bold text-cyber-pink target-lang mt-2 glitch-hover">Attention! Danger</p>
+                            <p class="text-sm text-gray-400 italic">"Nguy hiểm vãi chưởng!"</p>
+                        </div>
 
-// Controls
-document.addEventListener("keydown", e => {
-    if (e.code === "Space") flap();
-});
-canvas.addEventListener("mousedown", flap);
+                        <!-- Card 4 -->
+                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item" onclick="playSound('Je suis malade')">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-mono text-gray-400">[SKILL: SỦI]</span>
+                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                            </div>
+                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Je suis malade</p>
+                            <p class="text-sm text-gray-400 italic">"Nay ốm rồi sếp ơi"</p>
+                        </div>
+                    </div>
+                </div>
 
-function flap() {
-    if (gameOver) {
-        resetGame();
-    } else {
-        bird.velocity = bird.jump;
-    }
-}
+                <!-- Section 2: Items (Vocabulary) -->
+                <div class="glass-panel rounded-xl p-6" id="vocabulary" data-aos="fade-right" data-aos-delay="100">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                        <h3 class="text-2xl font-bold text-white neon-text-pink flex items-center">
+                            <i class="fa-solid fa-box-open mr-3"></i>KHO ĐỒ (ITEMS)
+                        </h3>
+                        <div class="flex flex-wrap gap-2 justify-center" id="filter-container">
+                            <!-- Filters JS -->
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="vocab-grid">
+                        <!-- Vocab Cards JS -->
+                    </div>
+                </div>
+            </div>
 
-// Game Loop
-function update() {
-    if (gameOver) return;
+            <!-- Right: Practice (Span 5) -->
+            <div class="lg:col-span-5 space-y-8" id="practice">
+                
+                <!-- Flashcard -->
+                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-cyber-cyan shadow-[0_0_20px_rgba(0,255,255,0.2)]" data-aos="fade-left">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-cyber-cyan"><i class="fa-solid fa-microchip mr-2"></i>NẠP DATA</h3>
+                        <span id="fc-counter" class="bg-cyber-cyan/20 text-cyber-cyan px-3 py-1 rounded font-mono text-xs border border-cyber-cyan">1/10</span>
+                    </div>
 
-    bird.velocity += bird.gravity;
-    bird.y += bird.velocity;
+                    <div class="h-[350px] perspective-1000 relative cursor-pointer group" onclick="toggleFlashcard()">
+                        <div id="flashcard-container" class="card-container w-full h-full relative duration-500">
+                            <!-- Front -->
+                            <div class="absolute w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-xl text-white flex flex-col items-center justify-center p-6 backface-hidden border-2 border-cyber-cyan neon-border">
+                                <span id="fc-category-badge" class="absolute top-4 right-4 bg-cyber-pink/20 text-cyber-pink px-2 py-1 text-[10px] uppercase font-bold border border-cyber-pink">ITEM VIP</span>
+                                <div class="text-6xl mb-4 animate-bounce">📦</div>
+                                <h2 id="fc-front" class="text-4xl font-black text-center target-lang text-white drop-shadow-md">Bonjour</h2>
+                                <p class="mt-6 text-xs text-cyber-cyan font-mono animate-pulse">>> TAP TO DECODE <<</p>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute w-full h-full bg-[#050b14] rounded-xl flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180 border-2 border-cyber-pink neon-border-pink">
+                                <h3 id="fc-back-meaning" class="text-3xl font-bold text-cyber-pink text-center mb-2">Xin chào</h3>
+                                <p id="fc-back-ipa" class="text-gray-500 font-mono text-sm mb-6 border-b border-gray-700 pb-1">/bɔ̃.ʒuʁ/</p>
+                                <button onclick="event.stopPropagation(); playSound(currentFlashcardWord)" class="w-16 h-16 rounded-full bg-cyber-pink/20 text-cyber-pink hover:bg-cyber-pink hover:text-white transition-all flex items-center justify-center border border-cyber-pink neon-text-pink">
+                                    <i class="fa-solid fa-volume-high text-2xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-    // Create pipes
-    if (frame % 90 === 0) {
-        const topHeight = Math.random() * 200 + 50;
-        pipes.push({
-            x: canvas.width,
-            top: topHeight,
-            bottom: canvas.height - topHeight - pipeGap,
-            passed: false
+                    <div class="flex justify-between mt-6 gap-4">
+                        <button onclick="prevCard()" class="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-white font-mono border-b-4 border-gray-900 active:border-b-0 active:translate-y-1 transition-all">
+                            << PREV
+                        </button>
+                        <button onclick="nextCard()" class="flex-1 py-3 bg-cyber-cyan text-black font-bold font-mono border-b-4 border-[#00aaaa] active:border-b-0 active:translate-y-1 hover:brightness-110 transition-all">
+                            NEXT >>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz (PvP) -->
+                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-cyber-pink shadow-[0_0_20px_rgba(255,0,255,0.2)]" data-aos="fade-left" data-aos-delay="100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-cyber-pink"><i class="fa-solid fa-gamepad mr-2"></i>PVP SERVER</h3>
+                        <div class="text-xs text-gray-400 font-mono">RANK: ĐỒNG I</div>
+                    </div>
+
+                    <!-- HP Bar -->
+                    <div class="w-full h-6 bg-gray-900 rounded-full border border-gray-700 mb-6 relative overflow-hidden">
+                        <div id="hp-bar" class="h-full bg-gradient-to-r from-green-500 to-green-400 hp-fill relative" style="width: 100%;">
+                            <div class="absolute top-0 right-0 h-full w-2 bg-white/30 animate-pulse"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white shadow-black drop-shadow-md">
+                            HP: <span id="hp-text">100</span>%
+                        </div>
+                    </div>
+
+                    <div id="game-over-screen" class="hidden text-center py-10">
+                        <h2 class="text-4xl font-black text-red-500 mb-2 neon-text-pink">GAME OVER</h2>
+                        <p class="text-gray-400 mb-6">"Về hành tinh mẹ dưỡng sức đi!"</p>
+                        <button onclick="resetGame()" class="px-6 py-3 bg-cyber-pink text-white font-bold rounded hover:bg-cyber-pink/80 transition-all neon-border-pink">
+                            CHƠI LẠI (HỒI SINH)
+                        </button>
+                    </div>
+
+                    <div id="quiz-container">
+                        <div class="mb-6 text-center">
+                            <p class="text-cyber-cyan text-[10px] mb-2 font-mono tracking-widest">>>> DECODE THIS WORD <<<</p>
+                            <h2 id="quiz-question" class="text-3xl font-black text-white target-lang glitch-hover">Question</h2>
+                        </div>
+                        <div id="quiz-options" class="space-y-3">
+                            <!-- Options JS -->
+                        </div>
+                    </div>
+                    
+                    <div id="quiz-feedback" class="hidden mt-4 text-center p-3 rounded font-bold border-2 font-mono text-sm"></div>
+                    
+                    <button onclick="nextQuiz()" class="mt-4 w-full py-3 bg-cyber-purple text-white font-bold hover:brightness-110 transition-all hidden border-b-4 border-[#8000aa] active:border-b-0 active:translate-y-1" id="btn-next-quiz">
+                        TIẾP CHIÊU >>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-12 pb-8 mt-12 border-t border-cyber-cyan/20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-4xl mb-4 animate-spin-slow">🛸</div>
+            <p class="mb-2 text-cyber-cyan font-mono text-sm">Made on Earth by Humans</p>
+            <p class="text-[10px] text-gray-500 font-mono">Powered by Cơm Sườn & Nước Ngọt</p>
+            <div class="mt-4 flex justify-center gap-4 text-2xl text-gray-600">
+                <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-tiktok hover:text-black hover:bg-white rounded cursor-pointer transition-colors"></i>
+                <i class="fa-brands fa-discord hover:text-indigo-500 cursor-pointer transition-colors"></i>
+            </div>
+            <p class="text-gray-700 text-[10px] mt-8">© 2026 KiotViet Universe.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- SETUP ---
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({ once: true, duration: 800, offset: 50 });
         });
-    }
 
-    // Move pipes
-    pipes.forEach(pipe => {
-        pipe.x -= 2;
+        // --- DATA ---
+        const languageCode = 'fr-FR'; 
+        
+        const topics = [
+            { id: 'all', name: 'ALL SERVER' },
+            { id: 'work', name: 'NHÀ MÁY' },
+            { id: 'safety', name: 'SINH TỒN' },
+            { id: 'daily', name: 'ĐỜI SỐNG' }
+        ];
 
-        // Score
-        if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
-            score++;
-            pipe.passed = true;
+        const vocabulary = [
+            { word: 'Attention', meaning: 'Coi chừng!', ipa: '/a.tɑ̃.sjɔ̃/', category: 'safety' },
+            { word: 'Danger', meaning: 'Nguy hiểm', ipa: '/dɑ̃.ʒe/', category: 'safety' },
+            { word: 'Interdit', meaning: 'Cấm nha cưng', ipa: '/ɛ̃.tɛʁ.di/', category: 'safety' },
+            { word: 'Le casque', meaning: 'Mũ giáp', ipa: '/luh kask/', category: 'safety' },
+            { word: 'Arrêtez', meaning: 'Stop ngay!', ipa: '/a.ʁɛ.te/', category: 'safety' },
+            
+            { word: 'Le patron', meaning: 'Trùm cuối (Sếp)', ipa: '/luh pa.tʁɔ̃/', category: 'work' },
+            { word: 'L\'usine', meaning: 'Căn cứ (Xưởng)', ipa: '/ly.zin/', category: 'work' },
+            { word: 'Travailler', meaning: 'Cày cuốc', ipa: '/tʁa.va.je/', category: 'work' },
+            { word: 'La machine', meaning: 'Cỗ máy', ipa: '/la ma.ʃin/', category: 'work' },
+            { word: 'Outils', meaning: 'Đồ nghề', ipa: '/u.ti/', category: 'work' },
+
+            { word: 'Le salaire', meaning: 'Lúa (Lương)', ipa: '/luh sa.lɛʁ/', category: 'work' },
+            { word: 'Heures sup', meaning: 'Tăng ca', ipa: '/œʁ syp/', category: 'work' },
+            { word: 'Signature', meaning: 'Chữ ký', ipa: '/si.ɲa.tyʁ/', category: 'work' },
+
+            { word: 'Supermarché', meaning: 'Siêu thị', ipa: '/sy.pɛʁ.maʁ.ʃe/', category: 'daily' },
+            { word: 'Le train', meaning: 'Tàu lượn', ipa: '/luh tʁɛ̃/', category: 'daily' },
+            { word: 'Le logement', meaning: 'Hang ổ (Nhà)', ipa: '/luh lɔʒ.mɑ̃/', category: 'daily' },
+            { word: 'Combien?', meaning: 'Nhiều tiền không?', ipa: '/kɔ̃.bjɛ̃/', category: 'daily' },
+            { word: 'Médecin', meaning: 'Thầy thuốc', ipa: '/med.sɛ̃/', category: 'daily' },
+        ];
+
+        // --- GAME STATE ---
+        let currentFilter = 'all';
+        let filteredVocab = [...vocabulary];
+        let currentFlashcardIndex = 0;
+        let hp = 100;
+        let currentQuizCorrectAnswer = null;
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFilters();
+            renderVocabulary();
+            initFlashcard();
+            generateQuiz();
+        });
+
+        // --- LOGIC ---
+        function playSound(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = languageCode;
+            utterance.rate = 0.9;
+            const voices = window.speechSynthesis.getVoices();
+            const frVoice = voices.find(v => v.lang.includes('fr'));
+            if (frVoice) utterance.voice = frVoice;
+            window.speechSynthesis.speak(utterance);
         }
 
-        // Collision
-        if (
-            bird.x + bird.radius > pipe.x &&
-            bird.x - bird.radius < pipe.x + pipeWidth &&
-            (bird.y - bird.radius < pipe.top ||
-             bird.y + bird.radius > canvas.height - pipe.bottom)
-        ) {
-            gameOver = true;
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-cyber-cyan text-black' : 'bg-cyber-pink text-white';
+            const icon = type === 'success' ? '😎' : '💀';
+            
+            toast.className = `${bgClass} font-mono px-4 py-3 rounded border-2 border-white shadow-[5px_5px_0px_0px_rgba(255,255,255,0.5)] flex items-center gap-3 toast-enter pointer-events-auto min-w-[200px] font-bold`;
+            toast.innerHTML = `<span class="text-xl">${icon}</span><span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-20px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
-    });
 
-    // Ground / ceiling
-    if (bird.y + bird.radius > canvas.height || bird.y - bird.radius < 0) {
-        gameOver = true;
-    }
+        // --- VOCAB ---
+        function renderFilters() {
+            const container = document.getElementById('filter-container');
+            container.innerHTML = topics.map(topic => `
+                <button onclick="setFilter('${topic.id}')" 
+                    class="px-4 py-2 font-mono text-xs font-bold transition-all border skew-x-[-10deg] hover:scale-105 ${currentFilter === topic.id ? 'bg-cyber-pink text-white border-cyber-pink shadow-[0_0_10px_#ff00ff]' : 'bg-transparent text-cyber-cyan border-cyber-cyan hover:bg-cyber-cyan/20'}">
+                    <span class="skew-x-[10deg] inline-block">${topic.name}</span>
+                </button>
+            `).join('');
+        }
 
-    frame++;
-}
+        function setFilter(id) {
+            currentFilter = id;
+            filteredVocab = id === 'all' ? vocabulary : vocabulary.filter(item => item.category === id);
+            currentFlashcardIndex = 0;
+            renderFilters();
+            renderVocabulary();
+            initFlashcard();
+        }
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function renderVocabulary() {
+            const container = document.getElementById('vocab-grid');
+            if (filteredVocab.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-6 text-gray-500 font-mono">Server bảo trì khu vực này...</div>`;
+                return;
+            }
+            container.innerHTML = filteredVocab.map(item => {
+                const isSafety = item.category === 'safety';
+                const borderColor = isSafety ? 'border-cyber-pink' : 'border-cyber-cyan/30';
+                const textColor = isSafety ? 'text-cyber-pink' : 'text-cyber-cyan';
+                return `
+                <div class="bg-black/50 p-3 rounded border ${borderColor} hover:bg-white/5 transition-all flex justify-between items-center group relative overflow-hidden">
+                    ${isSafety ? '<div class="absolute inset-0 bg-cyber-pink/5 animate-pulse-fast pointer-events-none"></div>' : ''}
+                    <div class="z-10">
+                        <h4 class="font-bold text-white target-lang text-lg">${item.word}</h4>
+                        <p class="text-xs text-gray-400 font-mono">>> ${item.meaning}</p>
+                    </div>
+                    <button onclick="playSound('${item.word.replace(/'/g, "\\'")}')" class="z-10 w-8 h-8 rounded bg-transparent border border-gray-600 text-gray-400 hover:border-white hover:text-white flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </button>
+                </div>
+            `}).join('');
+        }
 
-    // Bird
-    ctx.fillStyle = "yellow";
-    ctx.beginPath();
-    ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
-    ctx.fill();
+        // --- FLASHCARD ---
+        function initFlashcard() { if(filteredVocab.length > 0) updateFlashcardUI(); }
+        function toggleFlashcard() { document.getElementById('flashcard-container').classList.toggle('flipped'); }
 
-    // Pipes
-    ctx.fillStyle = "green";
-    pipes.forEach(pipe => {
-        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-        ctx.fillRect(pipe.x, canvas.height - pipe.bottom, pipeWidth, pipe.bottom);
-    });
+        function updateFlashcardUI() {
+            const container = document.getElementById('flashcard-container');
+            container.classList.remove('flipped');
+            if (filteredVocab.length === 0) return;
 
-    // Score
-    ctx.fillStyle = "#fff";
-    ctx.font = "24px Arial";
-    ctx.fillText("Score: " + score, 20, 40);
+            const item = filteredVocab[currentFlashcardIndex];
+            currentFlashcardWord = item.word;
 
-    // Game Over
-    if (gameOver) {
-        ctx.fillStyle = "rgba(0,0,0,0.6)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#fff";
-        ctx.font = "36px Arial";
-        ctx.fillText("GAME OVER", 90, 260);
-        ctx.font = "18px Arial";
-        ctx.fillText("Click hoặc SPACE để chơi lại", 70, 310);
-    }
-}
+            setTimeout(() => {
+                document.getElementById('fc-front').innerText = item.word;
+                document.getElementById('fc-back-meaning').innerText = item.meaning;
+                document.getElementById('fc-back-ipa').innerText = item.ipa;
+                document.getElementById('fc-counter').innerText = `${currentFlashcardIndex + 1}/${filteredVocab.length}`;
+            }, 200);
+        }
 
-function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
-}
+        function nextCard() {
+            if (filteredVocab.length === 0) return;
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % filteredVocab.length;
+            updateFlashcardUI();
+        }
 
-function resetGame() {
-    bird.y = 200;
-    bird.velocity = 0;
-    pipes.length = 0;
-    score = 0;
-    frame = 0;
-    gameOver = false;
-}
+        function prevCard() {
+            if (filteredVocab.length === 0) return;
+            currentFlashcardIndex = (currentFlashcardIndex - 1 + filteredVocab.length) % filteredVocab.length;
+            updateFlashcardUI();
+        }
 
-loop();
-</script>
+        // --- GAME (PVP) LOGIC ---
+        function updateHP(amount) {
+            hp += amount;
+            if (hp > 100) hp = 100;
+            if (hp <= 0) {
+                hp = 0;
+                endGame();
+            }
+            
+            const hpBar = document.getElementById('hp-bar');
+            const hpText = document.getElementById('hp-text');
+            
+            hpText.innerText = hp;
+            hpBar.style.width = `${hp}%`;
+            
+            // Color Logic
+            hpBar.className = `h-full hp-fill relative ${hp < 30 ? 'bg-red-600 animate-pulse' : hp < 60 ? 'bg-yellow-500' : 'bg-gradient-to-r from-green-500 to-green-400'}`;
+        }
 
+        function endGame() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.remove('hidden');
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('btn-next-quiz').classList.add('hidden');
+        }
+
+        function resetGame() {
+            hp = 100;
+            updateHP(0);
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('game-over-screen').classList.add('hidden');
+            generateQuiz();
+        }
+
+        function generateQuiz() {
+            if (vocabulary.length < 4) return;
+            
+            const questionItem = vocabulary[Math.floor(Math.random() * vocabulary.length)];
+            currentQuizCorrectAnswer = questionItem;
+
+            let distractors = [];
+            while(distractors.length < 3) {
+                const randomItem = vocabulary[Math.floor(Math.random() * vocabulary.length)];
+                if (randomItem.word !== questionItem.word && !distractors.includes(randomItem)) distractors.push(randomItem);
+            }
+            const options = [questionItem, ...distractors].sort(() => 0.5 - Math.random());
+
+            document.getElementById('quiz-question').innerText = questionItem.word;
+            document.getElementById('quiz-options').innerHTML = options.map((opt, index) => `
+                <button onclick="checkAnswer('${opt.word.replace(/'/g, "\\'")}')" class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-700 bg-gray-900/50 hover:bg-cyber-cyan/20 hover:border-cyber-cyan transition-all flex items-center font-mono text-sm group">
+                    <span class="w-6 h-6 bg-gray-800 text-white font-bold flex items-center justify-center mr-3 text-xs border border-gray-600 group-hover:border-cyber-cyan group-hover:text-cyber-cyan">${String.fromCharCode(65+index)}</span>
+                    <span class="font-bold text-gray-300 group-hover:text-white">${opt.meaning}</span>
+                </button>
+            `).join('');
+            
+            document.getElementById('quiz-feedback').className = 'hidden mt-4 text-center p-3 rounded font-bold border-2 font-mono text-sm';
+            document.getElementById('btn-next-quiz').classList.add('hidden');
+        }
+
+        function checkAnswer(selectedWord) {
+            const isCorrect = selectedWord === currentQuizCorrectAnswer.word;
+            const feedbackEl = document.getElementById('quiz-feedback');
+            
+            document.querySelectorAll('.quiz-option').forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                updateHP(10);
+                feedbackEl.innerHTML = `>> AO CHÌNH! QUÁ ĐỈNH <<`;
+                feedbackEl.className = "mt-4 text-center p-3 bg-green-500/20 text-green-400 border-2 border-green-500 block font-black tracking-widest";
+                showToast("Đỉnh nóc kịch trần!", "success");
+                playSound(currentQuizCorrectAnswer.word); 
+            } else {
+                updateHP(-20);
+                feedbackEl.innerHTML = `>> XU CÀ NA! ĐÁP ÁN: ${currentQuizCorrectAnswer.meaning} <<`;
+                feedbackEl.className = "mt-4 text-center p-3 bg-red-500/20 text-red-500 border-2 border-red-500 block font-bold animate-pulse";
+                showToast("Non quá bạn ơi!", "error");
+            }
+            
+            if(hp > 0) {
+                document.getElementById('btn-next-quiz').classList.remove('hidden');
+            }
+        }
+
+        function nextQuiz() { generateQuiz(); }
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    </script>
 </body>
 </html>
