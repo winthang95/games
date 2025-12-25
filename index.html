@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiếng Pháp XKLĐ - Edition Gen Z</title>
+    <title>Tiếng Pháp XKLĐ - Hello Kitty Edition</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,33 +22,36 @@
     <!-- Config Colors -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        cyber: {
-                            bg: '#050b14',
-                            glass: 'rgba(20, 30, 50, 0.7)',
-                            pink: '#ff00ff',
-                            cyan: '#00ffff',
-                            yellow: '#ffcc00',
-                            purple: '#bd00ff'
+                        kitty: {
+                            light: '#fff0f5', // Lavender Blush
+                            pink: '#ffb7c5',  // Cherry Blossom Pink
+                            hot: '#ff69b4',   // Hot Pink
+                            red: '#ff0033',   // Bow Red
+                            blue: '#87cefa',  // Sky Blue (for contrast)
+                            yellow: '#fffacd', // Lemon Chiffon
                         },
                     },
                     fontFamily: {
-                        sans: ['"Orbitron"', 'sans-serif'], // Sci-fi font
-                        mono: ['"VT323"', 'monospace'], // Pixel font
+                        sans: ['"Quicksand"', 'sans-serif'],
+                        cute: ['"Fredoka"', 'cursive'],
                         target: ['"Noto Sans"', 'sans-serif'],
                     },
                     animation: {
-                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glitch': 'glitch 1s linear infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
                     },
                     keyframes: {
-                        glitch: {
-                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
-                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
-                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
                         }
                     }
                 }
@@ -57,39 +60,41 @@
     </script>
 
     <style>
-        /* Vũ Trụ Style */
+        /* Hello Kitty Style */
         body { 
-            font-family: 'Orbitron', sans-serif;
-            background-color: #050b14;
-            color: #e0f2fe;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff0f5;
+            color: #555;
+            /* Polka dot pattern */
             background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
+                radial-gradient(#ffb7c5 20%, transparent 20%),
+                radial-gradient(#ffb7c5 20%, transparent 20%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
         }
 
-        /* Neon Text */
-        .neon-text-pink { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
-        .neon-text-cyan { text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
-        
-        /* Neon Border */
-        .neon-border { border: 1px solid #00ffff; box-shadow: 0 0 5px #00ffff, inset 0 0 5px #00ffff; }
-        .neon-border-pink { border: 1px solid #ff00ff; box-shadow: 0 0 5px #ff00ff, inset 0 0 5px #ff00ff; }
-
-        /* Cyber Glass */
+        /* Cute Glass */
         .glass-panel {
-            background: rgba(10, 20, 35, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 4px solid #fff;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px 0 rgba(255, 105, 180, 0.15);
         }
 
-        /* Glitch Effect Class */
-        .glitch-hover:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: #ff00ff;
+        /* Buttons */
+        .btn-cute {
+            background: #ff69b4;
+            color: white;
+            border-radius: 50px;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s;
+        }
+        .btn-cute:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+            background: #ff1493;
         }
 
         /* Flashcard 3D */
@@ -99,27 +104,31 @@
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
-        /* HP Bar Animation */
-        .hp-fill { transition: width 0.3s ease-in-out, background-color 0.3s; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #fff0f5; }
+        ::-webkit-scrollbar-thumb { background: #ff69b4; border-radius: 10px; border: 2px solid #fff0f5; }
     </style>
 </head>
 <body id="top" class="antialiased flex flex-col min-h-screen">
 
     <!-- Navbar -->
-    <header class="sticky top-0 z-50 bg-[#050b14]/90 backdrop-blur-md border-b border-cyber-cyan/30">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b-4 border-kitty-pink shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <a href="#top" class="flex items-center gap-2 group">
-                    <div class="text-3xl animate-bounce">👽</div>
+                <a href="#top" class="flex items-center gap-3 group">
+                    <div class="text-4xl animate-bounce relative">
+                        🐱
+                        <span class="absolute -top-2 -right-1 text-2xl animate-wiggle">🎀</span>
+                    </div>
                     <div class="flex flex-col">
-                        <span class="text-xl font-black tracking-widest text-cyber-cyan group-hover:text-cyber-pink transition-colors neon-text-cyan">KIOTVIET</span>
-                        <span class="text-[10px] text-cyber-pink font-mono tracking-widest">UNIVERSE_EDITION</span>
+                        <span class="text-2xl font-cute font-bold text-kitty-hot tracking-wide group-hover:text-kitty-red transition-colors">KIOTVIET</span>
+                        <span class="text-xs text-kitty-blue font-bold tracking-widest bg-kitty-light px-2 rounded-full">✨ CUTIE EDITION ✨</span>
                     </div>
                 </a>
                 <div class="hidden md:flex items-center space-x-4">
-                    <button onclick="scrollToSection('practice')" class="relative px-6 py-2 group font-bold text-white overflow-hidden rounded-none skew-x-[-15deg] border border-cyber-pink hover:bg-cyber-pink/20 transition-all">
-                        <span class="absolute w-full h-full bg-cyber-pink/10 top-0 left-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                        <span class="inline-block skew-x-[15deg]">🚀 VÀO GAME</span>
+                    <button onclick="scrollToSection('practice')" class="btn-cute px-6 py-2 font-bold text-lg flex items-center gap-2">
+                        <span>💖</span> BẮT ĐẦU HỌC
                     </button>
                 </div>
             </div>
@@ -129,13 +138,17 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
         <!-- Hero Section -->
         <section class="text-center mb-16 relative" data-aos="zoom-in">
-            <h1 class="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-pink animate-pulse tracking-tighter mb-4 glitch-hover cursor-default">
-                XKLĐ <br class="md:hidden"> SIÊU CẤP VIP PRO
+            <div class="inline-block animate-float mb-4">
+                <span class="text-6xl drop-shadow-lg">☁️</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-cute font-black text-kitty-hot drop-shadow-sm mb-4">
+                HỌC TIẾNG PHÁP <br class="md:hidden"> <span class="text-kitty-blue">CÙNG MÈO XINH</span>
             </h1>
-            <p class="text-lg md:text-xl text-cyber-cyan font-mono max-w-2xl mx-auto border-x border-cyber-cyan/50 px-4">
-                >> KHỞI ĐỘNG HỆ THỐNG NGÔN NGỮ PHÁP << <br>
-                <span class="text-white text-sm opacity-70">("Nạp lần đầu" kiến thức Công xưởng & Sinh tồn)</span>
-            </p>
+            <div class="bg-white inline-block px-6 py-3 rounded-full shadow-md border-2 border-kitty-pink transform rotate-1">
+                <p class="text-lg md:text-xl text-gray-500 font-bold">
+                    🌸 Chăm chỉ làm việc - Tự tin giao tiếp 🌸
+                </p>
+            </div>
         </section>
 
         <!-- Main Grid -->
@@ -145,61 +158,61 @@
             <div class="lg:col-span-7 space-y-8">
                 
                 <!-- Section 1: Skills -->
-                <div class="glass-panel rounded-xl p-6 relative overflow-hidden group" data-aos="fade-right">
-                    <div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity text-4xl">🤖</div>
-                    <h3 class="text-2xl font-bold text-cyber-yellow mb-6 flex items-center border-b border-cyber-yellow/30 pb-2 neon-text-cyan">
-                        <i class="fa-solid fa-skull mr-3"></i>ĐỐI ĐẦU BOSS (Quản lý)
+                <div class="glass-panel p-6 relative overflow-hidden group" data-aos="fade-right">
+                    <div class="absolute -top-4 -right-4 p-4 text-6xl opacity-20 rotate-12">🍓</div>
+                    <h3 class="text-2xl font-cute font-bold text-kitty-hot mb-6 flex items-center border-b-2 border-kitty-pink border-dashed pb-2">
+                        <i class="fa-solid fa-heart mr-3 text-kitty-red animate-pulse"></i>LỜI NÓI NGỌT NGÀO
                     </h3>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- Card 1 -->
-                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item relative" onclick="playSound('Bonjour Chef')">
-                            <div class="absolute -top-2 -right-2 text-xs bg-cyber-cyan text-black font-bold px-1 hidden group-hover/item:block">BUFF +100 Thiện cảm</div>
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-mono text-gray-400">[SKILL: CHÀO]</span>
-                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-kitty-pink hover:border-kitty-hot shadow-sm hover:shadow-md transition-all cursor-pointer group/item relative" onclick="playSound('Bonjour Chef')">
+                            <div class="absolute -top-3 -right-3 text-2xl group-hover/item:scale-125 transition-transform">👋</div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-kitty-blue bg-blue-50 px-2 py-1 rounded-full">Chào Sếp</span>
+                                <i class="fa-solid fa-volume-high text-kitty-pink"></i>
                             </div>
-                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Bonjour Chef</p>
-                            <p class="text-sm text-gray-400 italic">"Em chào sếp ạ"</p>
+                            <p class="text-xl font-bold text-gray-700 target-lang mt-1 group-hover/item:text-kitty-hot">Bonjour Chef</p>
+                            <p class="text-sm text-gray-400 italic">"Chào sếp đáng kính ạ"</p>
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item" onclick="playSound('Oui, j\'ai compris')">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-mono text-gray-400">[SKILL: DẠ VÂNG]</span>
-                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-kitty-pink hover:border-kitty-hot shadow-sm hover:shadow-md transition-all cursor-pointer group/item" onclick="playSound('Oui, j\'ai compris')">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-kitty-blue bg-blue-50 px-2 py-1 rounded-full">Dạ vâng</span>
+                                <i class="fa-solid fa-volume-high text-kitty-pink"></i>
                             </div>
-                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Oui, j'ai compris</p>
-                            <p class="text-sm text-gray-400 italic">"Ok sếp, đã rõ!"</p>
+                            <p class="text-xl font-bold text-gray-700 target-lang mt-1 group-hover/item:text-kitty-hot">Oui, j'ai compris</p>
+                            <p class="text-sm text-gray-400 italic">"Dạ em hiểu rồi ạ"</p>
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="bg-black/40 p-4 border border-cyber-pink/30 hover:border-cyber-pink hover:bg-cyber-pink/10 transition-all cursor-pointer group/item" onclick="playSound('Attention! Danger')">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-mono text-cyber-pink animate-pulse">[CẢNH BÁO ĐỎ]</span>
-                                <i class="fa-solid fa-volume-high text-cyber-pink"></i>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-kitty-red hover:bg-red-50 transition-all cursor-pointer group/item" onclick="playSound('Attention! Danger')">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded-full animate-pulse">❗ Cẩn thận nha</span>
+                                <i class="fa-solid fa-volume-high text-red-400"></i>
                             </div>
-                            <p class="text-xl font-bold text-cyber-pink target-lang mt-2 glitch-hover">Attention! Danger</p>
-                            <p class="text-sm text-gray-400 italic">"Nguy hiểm vãi chưởng!"</p>
+                            <p class="text-xl font-bold text-kitty-red target-lang mt-1">Attention! Danger</p>
+                            <p class="text-sm text-gray-400 italic">"Nguy hiểm đó nha!"</p>
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="bg-black/40 p-4 border border-cyber-cyan/30 hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all cursor-pointer group/item" onclick="playSound('Je suis malade')">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-mono text-gray-400">[SKILL: SỦI]</span>
-                                <i class="fa-solid fa-volume-high text-cyber-cyan animate-pulse"></i>
+                        <div class="bg-white p-4 rounded-2xl border-2 border-kitty-pink hover:border-kitty-hot shadow-sm hover:shadow-md transition-all cursor-pointer group/item" onclick="playSound('Je suis malade')">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-kitty-blue bg-blue-50 px-2 py-1 rounded-full">Nghỉ ốm</span>
+                                <i class="fa-solid fa-volume-high text-kitty-pink"></i>
                             </div>
-                            <p class="text-xl font-bold text-white target-lang mt-2 group-hover/item:text-cyber-cyan">Je suis malade</p>
-                            <p class="text-sm text-gray-400 italic">"Nay ốm rồi sếp ơi"</p>
+                            <p class="text-xl font-bold text-gray-700 target-lang mt-1 group-hover/item:text-kitty-hot">Je suis malade</p>
+                            <p class="text-sm text-gray-400 italic">"Huhu em bị ốm rồi"</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Section 2: Items (Vocabulary) -->
-                <div class="glass-panel rounded-xl p-6" id="vocabulary" data-aos="fade-right" data-aos-delay="100">
+                <div class="glass-panel p-6" id="vocabulary" data-aos="fade-right" data-aos-delay="100">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                        <h3 class="text-2xl font-bold text-white neon-text-pink flex items-center">
-                            <i class="fa-solid fa-box-open mr-3"></i>KHO ĐỒ (ITEMS)
+                        <h3 class="text-2xl font-cute font-bold text-kitty-hot flex items-center">
+                            <i class="fa-solid fa-star mr-3 text-kitty-yellow"></i>TỪ VỰNG LẤP LÁNH
                         </h3>
                         <div class="flex flex-wrap gap-2 justify-center" id="filter-container">
                             <!-- Filters JS -->
@@ -215,26 +228,26 @@
             <div class="lg:col-span-5 space-y-8" id="practice">
                 
                 <!-- Flashcard -->
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-cyber-cyan shadow-[0_0_20px_rgba(0,255,255,0.2)]" data-aos="fade-left">
+                <div class="glass-panel p-6 border-4 border-white shadow-xl bg-gradient-to-br from-white to-pink-50" data-aos="fade-left">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-cyber-cyan"><i class="fa-solid fa-microchip mr-2"></i>NẠP DATA</h3>
-                        <span id="fc-counter" class="bg-cyber-cyan/20 text-cyber-cyan px-3 py-1 rounded font-mono text-xs border border-cyber-cyan">1/10</span>
+                        <h3 class="text-xl font-cute font-bold text-kitty-hot"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>THẺ BÀI MA THUẬT</h3>
+                        <span id="fc-counter" class="bg-kitty-hot text-white px-3 py-1 rounded-full font-bold text-xs shadow-sm">1/10</span>
                     </div>
 
                     <div class="h-[350px] perspective-1000 relative cursor-pointer group" onclick="toggleFlashcard()">
                         <div id="flashcard-container" class="card-container w-full h-full relative duration-500">
                             <!-- Front -->
-                            <div class="absolute w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-xl text-white flex flex-col items-center justify-center p-6 backface-hidden border-2 border-cyber-cyan neon-border">
-                                <span id="fc-category-badge" class="absolute top-4 right-4 bg-cyber-pink/20 text-cyber-pink px-2 py-1 text-[10px] uppercase font-bold border border-cyber-pink">ITEM VIP</span>
-                                <div class="text-6xl mb-4 animate-bounce">📦</div>
-                                <h2 id="fc-front" class="text-4xl font-black text-center target-lang text-white drop-shadow-md">Bonjour</h2>
-                                <p class="mt-6 text-xs text-cyber-cyan font-mono animate-pulse">>> TAP TO DECODE <<</p>
+                            <div class="absolute w-full h-full bg-white rounded-3xl text-gray-700 flex flex-col items-center justify-center p-6 backface-hidden border-4 border-kitty-pink shadow-inner">
+                                <span id="fc-category-badge" class="absolute top-4 right-4 bg-kitty-blue text-white px-3 py-1 text-xs font-bold rounded-full">✨ TỪ MỚI</span>
+                                <div class="text-6xl mb-4 animate-bounce">🎁</div>
+                                <h2 id="fc-front" class="text-4xl font-cute font-black text-center target-lang text-kitty-hot drop-shadow-sm">Bonjour</h2>
+                                <p class="mt-6 text-sm text-gray-400 font-bold animate-pulse">💕 Chạm nhẹ để mở quà 💕</p>
                             </div>
                             <!-- Back -->
-                            <div class="absolute w-full h-full bg-[#050b14] rounded-xl flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180 border-2 border-cyber-pink neon-border-pink">
-                                <h3 id="fc-back-meaning" class="text-3xl font-bold text-cyber-pink text-center mb-2">Xin chào</h3>
-                                <p id="fc-back-ipa" class="text-gray-500 font-mono text-sm mb-6 border-b border-gray-700 pb-1">/bɔ̃.ʒuʁ/</p>
-                                <button onclick="event.stopPropagation(); playSound(currentFlashcardWord)" class="w-16 h-16 rounded-full bg-cyber-pink/20 text-cyber-pink hover:bg-cyber-pink hover:text-white transition-all flex items-center justify-center border border-cyber-pink neon-text-pink">
+                            <div class="absolute w-full h-full bg-kitty-pink rounded-3xl flex flex-col items-center justify-center p-6 backface-hidden rotate-y-180 border-4 border-white shadow-lg">
+                                <h3 id="fc-back-meaning" class="text-3xl font-cute font-bold text-white text-center mb-2 drop-shadow-md">Xin chào</h3>
+                                <p id="fc-back-ipa" class="text-white/80 font-mono text-lg mb-6 border-b-2 border-white/50 pb-1">/bɔ̃.ʒuʁ/</p>
+                                <button onclick="event.stopPropagation(); playSound(currentFlashcardWord)" class="w-16 h-16 rounded-full bg-white text-kitty-hot hover:scale-110 transition-all flex items-center justify-center shadow-lg">
                                     <i class="fa-solid fa-volume-high text-2xl"></i>
                                 </button>
                             </div>
@@ -242,54 +255,55 @@
                     </div>
 
                     <div class="flex justify-between mt-6 gap-4">
-                        <button onclick="prevCard()" class="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-white font-mono border-b-4 border-gray-900 active:border-b-0 active:translate-y-1 transition-all">
-                            << PREV
+                        <button onclick="prevCard()" class="flex-1 py-3 rounded-full bg-white border-2 border-gray-200 text-gray-500 font-bold hover:bg-gray-50 transition-all">
+                            ⬅️ Trước
                         </button>
-                        <button onclick="nextCard()" class="flex-1 py-3 bg-cyber-cyan text-black font-bold font-mono border-b-4 border-[#00aaaa] active:border-b-0 active:translate-y-1 hover:brightness-110 transition-all">
-                            NEXT >>
+                        <button onclick="nextCard()" class="flex-1 py-3 rounded-full bg-kitty-hot text-white font-bold shadow-md hover:bg-kitty-pink transition-all">
+                            Tiếp theo ➡️
                         </button>
                     </div>
                 </div>
 
-                <!-- Quiz (PvP) -->
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-cyber-pink shadow-[0_0_20px_rgba(255,0,255,0.2)]" data-aos="fade-left" data-aos-delay="100">
+                <!-- Quiz (Cute Version) -->
+                <div class="glass-panel p-6 border-4 border-white shadow-xl" data-aos="fade-left" data-aos-delay="100">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-cyber-pink"><i class="fa-solid fa-gamepad mr-2"></i>PVP SERVER</h3>
-                        <div class="text-xs text-gray-400 font-mono">RANK: ĐỒNG I</div>
+                        <h3 class="text-xl font-cute font-bold text-kitty-blue"><i class="fa-solid fa-puzzle-piece mr-2"></i>GÓC ĐỐ VUI</h3>
+                        <div class="text-xs text-kitty-hot font-bold bg-pink-100 px-2 py-1 rounded">CẤP ĐỘ: MÈO CON 🐾</div>
                     </div>
 
-                    <!-- HP Bar -->
-                    <div class="w-full h-6 bg-gray-900 rounded-full border border-gray-700 mb-6 relative overflow-hidden">
-                        <div id="hp-bar" class="h-full bg-gradient-to-r from-green-500 to-green-400 hp-fill relative" style="width: 100%;">
-                            <div class="absolute top-0 right-0 h-full w-2 bg-white/30 animate-pulse"></div>
+                    <!-- HP Bar (Heart Bar) -->
+                    <div class="w-full h-8 bg-pink-100 rounded-full border-2 border-white shadow-inner mb-6 relative overflow-hidden">
+                        <div id="hp-bar" class="h-full bg-gradient-to-r from-kitty-hot to-kitty-pink transition-all duration-500 relative flex items-center" style="width: 100%;">
+                            <div class="absolute w-full h-full opacity-30" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'white\'><path d=\'M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 0 0-7.78-7.77l-.61.61z\'/></svg>'); background-size: 20px;"></div>
                         </div>
-                        <div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white shadow-black drop-shadow-md">
-                            HP: <span id="hp-text">100</span>%
+                        <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white drop-shadow-md">
+                            NĂNG LƯỢNG YÊU THƯƠNG: <span id="hp-text" class="ml-1">100</span>%
                         </div>
                     </div>
 
                     <div id="game-over-screen" class="hidden text-center py-10">
-                        <h2 class="text-4xl font-black text-red-500 mb-2 neon-text-pink">GAME OVER</h2>
-                        <p class="text-gray-400 mb-6">"Về hành tinh mẹ dưỡng sức đi!"</p>
-                        <button onclick="resetGame()" class="px-6 py-3 bg-cyber-pink text-white font-bold rounded hover:bg-cyber-pink/80 transition-all neon-border-pink">
-                            CHƠI LẠI (HỒI SINH)
+                        <div class="text-6xl mb-4 animate-bounce">😿</div>
+                        <h2 class="text-3xl font-cute font-black text-gray-600 mb-2">HẾT NĂNG LƯỢNG RỒI!</h2>
+                        <p class="text-gray-400 mb-6">"Đừng buồn nha, mình làm lại nào!"</p>
+                        <button onclick="resetGame()" class="btn-cute px-8 py-3 font-bold text-lg">
+                            CHƠI LẠI NHÉ 💖
                         </button>
                     </div>
 
                     <div id="quiz-container">
                         <div class="mb-6 text-center">
-                            <p class="text-cyber-cyan text-[10px] mb-2 font-mono tracking-widest">>>> DECODE THIS WORD <<<</p>
-                            <h2 id="quiz-question" class="text-3xl font-black text-white target-lang glitch-hover">Question</h2>
+                            <p class="text-kitty-blue text-xs mb-2 font-bold tracking-widest uppercase">✨ Từ này nghĩa là gì nhỉ? ✨</p>
+                            <h2 id="quiz-question" class="text-3xl font-black text-kitty-hot target-lang drop-shadow-sm">Question</h2>
                         </div>
                         <div id="quiz-options" class="space-y-3">
                             <!-- Options JS -->
                         </div>
                     </div>
                     
-                    <div id="quiz-feedback" class="hidden mt-4 text-center p-3 rounded font-bold border-2 font-mono text-sm"></div>
+                    <div id="quiz-feedback" class="hidden mt-4 text-center p-4 rounded-2xl font-bold border-2 font-cute text-lg"></div>
                     
-                    <button onclick="nextQuiz()" class="mt-4 w-full py-3 bg-cyber-purple text-white font-bold hover:brightness-110 transition-all hidden border-b-4 border-[#8000aa] active:border-b-0 active:translate-y-1" id="btn-next-quiz">
-                        TIẾP CHIÊU >>
+                    <button onclick="nextQuiz()" class="mt-4 w-full py-3 rounded-full bg-kitty-blue text-white font-bold hover:bg-blue-300 transition-all hidden shadow-md" id="btn-next-quiz">
+                        CÂU TIẾP THEO 🌸
                     </button>
                 </div>
 
@@ -298,17 +312,17 @@
     </main>
     
     <!-- Footer -->
-    <footer class="bg-black text-white pt-12 pb-8 mt-12 border-t border-cyber-cyan/20">
+    <footer class="bg-white/80 backdrop-blur-md text-gray-500 pt-10 pb-6 mt-12 border-t-4 border-kitty-pink">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="text-4xl mb-4 animate-spin-slow">🛸</div>
-            <p class="mb-2 text-cyber-cyan font-mono text-sm">Made on Earth by Humans</p>
-            <p class="text-[10px] text-gray-500 font-mono">Powered by Cơm Sườn & Nước Ngọt</p>
-            <div class="mt-4 flex justify-center gap-4 text-2xl text-gray-600">
-                <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer transition-colors"></i>
-                <i class="fa-brands fa-tiktok hover:text-black hover:bg-white rounded cursor-pointer transition-colors"></i>
-                <i class="fa-brands fa-discord hover:text-indigo-500 cursor-pointer transition-colors"></i>
+            <div class="text-5xl mb-4 animate-bounce-slow inline-block">😻</div>
+            <p class="mb-2 text-kitty-hot font-bold font-cute text-lg">Học vui vẻ - Làm việc chăm chỉ</p>
+            <p class="text-xs text-gray-400">Được làm bằng 💖 và 🍰</p>
+            <div class="mt-4 flex justify-center gap-4 text-2xl text-kitty-pink">
+                <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer transition-colors hover:scale-110"></i>
+                <i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer transition-colors hover:scale-110"></i>
+                <i class="fa-brands fa-tiktok hover:text-black cursor-pointer transition-colors hover:scale-110"></i>
             </div>
-            <p class="text-gray-700 text-[10px] mt-8">© 2026 KiotViet Universe.</p>
+            <p class="text-gray-400 text-xs mt-6">© 2026 KiotViet Cutie Edition.</p>
         </div>
     </footer>
 
@@ -320,41 +334,41 @@
     <script>
         // --- SETUP ---
         document.addEventListener('DOMContentLoaded', function () {
-            AOS.init({ once: true, duration: 800, offset: 50 });
+            AOS.init({ once: true, duration: 1000, offset: 50 });
         });
 
         // --- DATA ---
         const languageCode = 'fr-FR'; 
         
         const topics = [
-            { id: 'all', name: 'ALL SERVER' },
-            { id: 'work', name: 'NHÀ MÁY' },
-            { id: 'safety', name: 'SINH TỒN' },
+            { id: 'all', name: 'TẤT CẢ' },
+            { id: 'work', name: 'CÔNG XƯỞNG' },
+            { id: 'safety', name: 'AN TOÀN' },
             { id: 'daily', name: 'ĐỜI SỐNG' }
         ];
 
         const vocabulary = [
-            { word: 'Attention', meaning: 'Coi chừng!', ipa: '/a.tɑ̃.sjɔ̃/', category: 'safety' },
-            { word: 'Danger', meaning: 'Nguy hiểm', ipa: '/dɑ̃.ʒe/', category: 'safety' },
-            { word: 'Interdit', meaning: 'Cấm nha cưng', ipa: '/ɛ̃.tɛʁ.di/', category: 'safety' },
-            { word: 'Le casque', meaning: 'Mũ giáp', ipa: '/luh kask/', category: 'safety' },
-            { word: 'Arrêtez', meaning: 'Stop ngay!', ipa: '/a.ʁɛ.te/', category: 'safety' },
+            { word: 'Attention', meaning: 'Cẩn thận nhé!', ipa: '/a.tɑ̃.sjɔ̃/', category: 'safety' },
+            { word: 'Danger', meaning: 'Nguy hiểm đó', ipa: '/dɑ̃.ʒe/', category: 'safety' },
+            { word: 'Interdit', meaning: 'Không được đâu', ipa: '/ɛ̃.tɛʁ.di/', category: 'safety' },
+            { word: 'Le casque', meaning: 'Mũ bảo hiểm', ipa: '/luh kask/', category: 'safety' },
+            { word: 'Arrêtez', meaning: 'Dừng lại nào', ipa: '/a.ʁɛ.te/', category: 'safety' },
             
-            { word: 'Le patron', meaning: 'Trùm cuối (Sếp)', ipa: '/luh pa.tʁɔ̃/', category: 'work' },
-            { word: 'L\'usine', meaning: 'Căn cứ (Xưởng)', ipa: '/ly.zin/', category: 'work' },
-            { word: 'Travailler', meaning: 'Cày cuốc', ipa: '/tʁa.va.je/', category: 'work' },
-            { word: 'La machine', meaning: 'Cỗ máy', ipa: '/la ma.ʃin/', category: 'work' },
-            { word: 'Outils', meaning: 'Đồ nghề', ipa: '/u.ti/', category: 'work' },
+            { word: 'Le patron', meaning: 'Sếp iu', ipa: '/luh pa.tʁɔ̃/', category: 'work' },
+            { word: 'L\'usine', meaning: 'Xưởng làm việc', ipa: '/ly.zin/', category: 'work' },
+            { word: 'Travailler', meaning: 'Làm việc chăm chỉ', ipa: '/tʁa.va.je/', category: 'work' },
+            { word: 'La machine', meaning: 'Máy móc', ipa: '/la ma.ʃin/', category: 'work' },
+            { word: 'Outils', meaning: 'Dụng cụ', ipa: '/u.ti/', category: 'work' },
 
-            { word: 'Le salaire', meaning: 'Lúa (Lương)', ipa: '/luh sa.lɛʁ/', category: 'work' },
+            { word: 'Le salaire', meaning: 'Tiền lương', ipa: '/luh sa.lɛʁ/', category: 'work' },
             { word: 'Heures sup', meaning: 'Tăng ca', ipa: '/œʁ syp/', category: 'work' },
-            { word: 'Signature', meaning: 'Chữ ký', ipa: '/si.ɲa.tyʁ/', category: 'work' },
+            { word: 'Signature', meaning: 'Ký tên', ipa: '/si.ɲa.tyʁ/', category: 'work' },
 
             { word: 'Supermarché', meaning: 'Siêu thị', ipa: '/sy.pɛʁ.maʁ.ʃe/', category: 'daily' },
-            { word: 'Le train', meaning: 'Tàu lượn', ipa: '/luh tʁɛ̃/', category: 'daily' },
-            { word: 'Le logement', meaning: 'Hang ổ (Nhà)', ipa: '/luh lɔʒ.mɑ̃/', category: 'daily' },
-            { word: 'Combien?', meaning: 'Nhiều tiền không?', ipa: '/kɔ̃.bjɛ̃/', category: 'daily' },
-            { word: 'Médecin', meaning: 'Thầy thuốc', ipa: '/med.sɛ̃/', category: 'daily' },
+            { word: 'Le train', meaning: 'Tàu hỏa', ipa: '/luh tʁɛ̃/', category: 'daily' },
+            { word: 'Le logement', meaning: 'Nhà ở', ipa: '/luh lɔʒ.mɑ̃/', category: 'daily' },
+            { word: 'Combien?', meaning: 'Cái này bao nhiêu?', ipa: '/kɔ̃.bjɛ̃/', category: 'daily' },
+            { word: 'Médecin', meaning: 'Bác sĩ', ipa: '/med.sɛ̃/', category: 'daily' },
         ];
 
         // --- GAME STATE ---
@@ -387,11 +401,11 @@
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            const bgClass = type === 'success' ? 'bg-cyber-cyan text-black' : 'bg-cyber-pink text-white';
-            const icon = type === 'success' ? '😎' : '💀';
+            const bgClass = type === 'success' ? 'bg-pink-100 text-pink-600 border-pink-300' : 'bg-red-100 text-red-500 border-red-300';
+            const icon = type === 'success' ? '🥰' : '🥺';
             
-            toast.className = `${bgClass} font-mono px-4 py-3 rounded border-2 border-white shadow-[5px_5px_0px_0px_rgba(255,255,255,0.5)] flex items-center gap-3 toast-enter pointer-events-auto min-w-[200px] font-bold`;
-            toast.innerHTML = `<span class="text-xl">${icon}</span><span>${message}</span>`;
+            toast.className = `${bgClass} font-cute px-6 py-4 rounded-3xl border-2 shadow-lg flex items-center gap-3 toast-enter pointer-events-auto min-w-[250px] font-bold text-lg`;
+            toast.innerHTML = `<span class="text-2xl animate-bounce">${icon}</span><span>${message}</span>`;
             
             container.appendChild(toast);
             setTimeout(() => {
@@ -406,8 +420,8 @@
             const container = document.getElementById('filter-container');
             container.innerHTML = topics.map(topic => `
                 <button onclick="setFilter('${topic.id}')" 
-                    class="px-4 py-2 font-mono text-xs font-bold transition-all border skew-x-[-10deg] hover:scale-105 ${currentFilter === topic.id ? 'bg-cyber-pink text-white border-cyber-pink shadow-[0_0_10px_#ff00ff]' : 'bg-transparent text-cyber-cyan border-cyber-cyan hover:bg-cyber-cyan/20'}">
-                    <span class="skew-x-[10deg] inline-block">${topic.name}</span>
+                    class="px-4 py-2 font-cute font-bold rounded-full transition-all border-2 ${currentFilter === topic.id ? 'bg-kitty-hot text-white border-white shadow-md transform scale-105' : 'bg-white text-kitty-pink border-kitty-pink hover:bg-pink-50'}">
+                    ${topic.name}
                 </button>
             `).join('');
         }
@@ -424,22 +438,21 @@
         function renderVocabulary() {
             const container = document.getElementById('vocab-grid');
             if (filteredVocab.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-6 text-gray-500 font-mono">Server bảo trì khu vực này...</div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-6 text-gray-400 font-cute text-xl">Chưa có gì ở đây nè... 😿</div>`;
                 return;
             }
             container.innerHTML = filteredVocab.map(item => {
                 const isSafety = item.category === 'safety';
-                const borderColor = isSafety ? 'border-cyber-pink' : 'border-cyber-cyan/30';
-                const textColor = isSafety ? 'text-cyber-pink' : 'text-cyber-cyan';
+                const borderColor = isSafety ? 'border-kitty-red' : 'border-kitty-pink';
+                const textColor = isSafety ? 'text-kitty-red' : 'text-kitty-hot';
                 return `
-                <div class="bg-black/50 p-3 rounded border ${borderColor} hover:bg-white/5 transition-all flex justify-between items-center group relative overflow-hidden">
-                    ${isSafety ? '<div class="absolute inset-0 bg-cyber-pink/5 animate-pulse-fast pointer-events-none"></div>' : ''}
+                <div class="bg-white p-4 rounded-2xl border-2 ${borderColor} hover:shadow-lg transition-all flex justify-between items-center group relative overflow-hidden cursor-default">
                     <div class="z-10">
-                        <h4 class="font-bold text-white target-lang text-lg">${item.word}</h4>
-                        <p class="text-xs text-gray-400 font-mono">>> ${item.meaning}</p>
+                        <h4 class="font-bold ${textColor} target-lang text-lg group-hover:scale-105 transition-transform origin-left">${item.word}</h4>
+                        <p class="text-sm text-gray-500 font-cute font-bold">🌸 ${item.meaning}</p>
                     </div>
-                    <button onclick="playSound('${item.word.replace(/'/g, "\\'")}')" class="z-10 w-8 h-8 rounded bg-transparent border border-gray-600 text-gray-400 hover:border-white hover:text-white flex items-center justify-center transition-colors">
-                        <i class="fa-solid fa-play text-xs"></i>
+                    <button onclick="playSound('${item.word.replace(/'/g, "\\'")}')" class="z-10 w-10 h-10 rounded-full bg-pink-50 text-kitty-hot border-2 border-kitty-pink hover:bg-kitty-hot hover:text-white hover:border-white hover:scale-110 flex items-center justify-center transition-all shadow-sm">
+                        <i class="fa-solid fa-play text-sm ml-1"></i>
                     </button>
                 </div>
             `}).join('');
@@ -493,7 +506,11 @@
             hpBar.style.width = `${hp}%`;
             
             // Color Logic
-            hpBar.className = `h-full hp-fill relative ${hp < 30 ? 'bg-red-600 animate-pulse' : hp < 60 ? 'bg-yellow-500' : 'bg-gradient-to-r from-green-500 to-green-400'}`;
+            if (hp < 30) {
+                hpBar.className = "h-full bg-red-400 relative flex items-center";
+            } else {
+                hpBar.className = "h-full bg-gradient-to-r from-kitty-hot to-kitty-pink relative flex items-center";
+            }
         }
 
         function endGame() {
@@ -526,13 +543,13 @@
 
             document.getElementById('quiz-question').innerText = questionItem.word;
             document.getElementById('quiz-options').innerHTML = options.map((opt, index) => `
-                <button onclick="checkAnswer('${opt.word.replace(/'/g, "\\'")}')" class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-700 bg-gray-900/50 hover:bg-cyber-cyan/20 hover:border-cyber-cyan transition-all flex items-center font-mono text-sm group">
-                    <span class="w-6 h-6 bg-gray-800 text-white font-bold flex items-center justify-center mr-3 text-xs border border-gray-600 group-hover:border-cyber-cyan group-hover:text-cyber-cyan">${String.fromCharCode(65+index)}</span>
-                    <span class="font-bold text-gray-300 group-hover:text-white">${opt.meaning}</span>
+                <button onclick="checkAnswer('${opt.word.replace(/'/g, "\\'")}')" class="quiz-option w-full text-left px-4 py-3 rounded-xl border-2 border-pink-100 bg-white hover:bg-pink-50 hover:border-kitty-pink transition-all flex items-center font-cute font-bold text-gray-600 group shadow-sm">
+                    <span class="w-8 h-8 bg-pink-100 text-kitty-hot font-black flex items-center justify-center mr-3 rounded-full border border-pink-200 group-hover:bg-kitty-hot group-hover:text-white transition-colors">${String.fromCharCode(65+index)}</span>
+                    <span class="group-hover:text-kitty-hot transition-colors">${opt.meaning}</span>
                 </button>
             `).join('');
             
-            document.getElementById('quiz-feedback').className = 'hidden mt-4 text-center p-3 rounded font-bold border-2 font-mono text-sm';
+            document.getElementById('quiz-feedback').className = 'hidden mt-4 text-center p-4 rounded-2xl font-bold border-2 font-cute text-lg';
             document.getElementById('btn-next-quiz').classList.add('hidden');
         }
 
@@ -544,15 +561,15 @@
 
             if (isCorrect) {
                 updateHP(10);
-                feedbackEl.innerHTML = `>> AO CHÌNH! QUÁ ĐỈNH <<`;
-                feedbackEl.className = "mt-4 text-center p-3 bg-green-500/20 text-green-400 border-2 border-green-500 block font-black tracking-widest";
-                showToast("Đỉnh nóc kịch trần!", "success");
+                feedbackEl.innerHTML = `🌟 GIỎI QUÁ ĐI! CHÍNH XÁC NÈ! 🌟`;
+                feedbackEl.className = "mt-4 text-center p-4 bg-green-50 text-green-500 border-2 border-green-200 block font-cute text-xl shadow-sm animate-bounce";
+                showToast("Tuyệt vời ông mặt trời!", "success");
                 playSound(currentQuizCorrectAnswer.word); 
             } else {
                 updateHP(-20);
-                feedbackEl.innerHTML = `>> XU CÀ NA! ĐÁP ÁN: ${currentQuizCorrectAnswer.meaning} <<`;
-                feedbackEl.className = "mt-4 text-center p-3 bg-red-500/20 text-red-500 border-2 border-red-500 block font-bold animate-pulse";
-                showToast("Non quá bạn ơi!", "error");
+                feedbackEl.innerHTML = `😿 TIẾC QUÁ! ĐÁP ÁN LÀ: ${currentQuizCorrectAnswer.meaning}`;
+                feedbackEl.className = "mt-4 text-center p-4 bg-red-50 text-red-400 border-2 border-red-200 block font-cute font-bold shadow-sm";
+                showToast("Cố lên lần sau nha!", "error");
             }
             
             if(hp > 0) {
